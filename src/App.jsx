@@ -119,7 +119,7 @@ function App() {
           
           <Reveal delay={0.2}>
             <p className="text-xl text-gray-400 leading-relaxed mb-12 max-w-2xl">
-              3 years building production frontends across <span className="text-white border-b border-blue-500/30 ml-2">Angular, Next.js, Ember.js, and Flutter.</span> I specialize in enterprise systems, workflow automation, and actually shipping features that users need. 
+              3 years building production frontends across <span className="text-white ml-2">Angular, Next.js, Ember.js, and Flutter.</span> I specialize in enterprise systems, workflow automation, and actually shipping features that users need. 
             </p>
           </Reveal>
           
@@ -259,7 +259,7 @@ function App() {
         <div className="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent"></div>
 
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-24 items-start">
+          <div className="grid lg:grid-cols-2 gap-6 md:gap-12 lg:gap-24 items-start">
             {/* Left Column: CTA */}
             <div>
               <Reveal>
@@ -271,7 +271,7 @@ function App() {
               </Reveal>
 
               <Reveal delay={0.2}>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-2 gap-4">
                   <a 
                     href="https://www.linkedin.com/in/ananth-p-039b31254" 
                     target="_blank" 
@@ -300,7 +300,7 @@ function App() {
 
                   <button 
                     onClick={copyEmail}
-                    className="col-span-1 sm:col-span-2 group p-6 glass-panel border border-white/5 hover:border-emerald-500/30 transition-all duration-500 flex items-center justify-between text-left"
+                    className="col-span-2 group p-3 md:p-6 glass-panel border border-white/5 hover:border-emerald-500/30 transition-all duration-500 flex items-center justify-between text-left"
                   >
                     <div className="flex items-center gap-6">
                       <div className="p-4 bg-white/5 rounded-2xl group-hover:bg-emerald-500/10 transition-colors">
@@ -324,14 +324,14 @@ function App() {
             {/* Right Column: Status & Time */}
             <div className="lg:pt-24 flex flex-col items-center lg:items-end text-center lg:text-right">
               <Reveal delay={0.3}>
-                <div className="p-8 glass-panel border border-white/5 rounded-[2.5rem] mb-6 md:mb-12 max-w-sm relative overflow-hidden group">
+                <div className=" p-6 md:p-8 glass-panel border border-white/5 rounded-[2.5rem] mb-6 md:mb-12 max-w-sm relative overflow-hidden group">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/5 blur-3xl -mr-16 -mt-16"></div>
                   <div className="relative z-10">
                     <div className="flex items-center justify-center lg:justify-end gap-3 mb-6">
                       <div className="w-2 h-2 bg-emerald-500 rounded-full animate-pulse"></div>
                       <p className="text-xs font-black uppercase tracking-widest text-emerald-500">Available for 2026</p>
                     </div>
-                    <p className="text-xl font-medium text-gray-200 leading-snug mb-8">
+                    <p className="text-xl font-medium text-gray-200 leading-snug mb-3 md:mb-8">
                       Open for high-impact roles and innovative frontend collaborations.
                     </p>
                     
@@ -347,7 +347,7 @@ function App() {
                   <p className="text-[10px] text-gray-600 font-black uppercase tracking-[0.4em]">
                     Frontend Engineer & Technical Consultant
                   </p>
-                  <div className="pt-8 flex flex-col items-center lg:items-end gap-2">
+                  <div className=" pt-4 md:pt-8 flex flex-col items-center lg:items-end gap-2">
                     <p className="text-[10px] text-gray-600 font-bold uppercase tracking-widest">Designed with absolute precision.</p>
                     <p className="text-[9px] text-gray-700 font-medium">© 2026 ALL RIGHTS RESERVED.</p>
                   </div>

@@ -27,34 +27,67 @@ const WorkModules = () => {
   };
 
   // Scroll-to-reveal logic for mobile
-  React.useEffect(() => {
-    if (!isMobile) return;
+  // Smoother Scroll-to-reveal logic for mobile
+  // React.useEffect(() => {
+  //   if (!isMobile) return;
 
-    const observerOptions = {
-      root: null,
-      rootMargin: '-20% 0px -20% 0px',
-      threshold: 0.5
-    };
+  //   let rafId = null;
+  //   const ratios = new Map();
 
-    const observerCallback = (entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const projectId = entry.target.getAttribute('data-project-id');
-          if (projectId) {
-            setActiveCard(projectId);
-          }
-        }
-      });
-    };
+  //   const observerOptions = {
+  //     root: null,
+  //     // Creates a "sweet spot" in the middle 30% of the screen.
+  //     // Top 35% and Bottom 35% are margins (ignored).
+  //     rootMargin: '-35% 0px -35% 0px',
+  //     threshold: [0, 0.25, 0.5, 0.75, 1]
+  //   };
 
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-    const elements = document.querySelectorAll('[data-project-id]');
-    elements.forEach(el => observer.observe(el));
+  //   const observerCallback = (entries) => {
+  //     // 1. Update our map of visibility ratios
+  //     entries.forEach(entry => {
+  //       const id = entry.target.getAttribute('data-project-id');
+  //       if (id) {
+  //         ratios.set(id, {
+  //           isIntersecting: entry.isIntersecting,
+  //           ratio: entry.intersectionRatio
+  //         });
+  //       }
+  //     });
 
-    return () => {
-      elements.forEach(el => observer.unobserve(el));
-    };
-  }, [isMobile]);
+  //     // 2. Use requestAnimationFrame to process the update on the next paint cycle
+  //     // This decouples the heavy calculation from the scroll event
+  //     if (!rafId) {
+  //       rafId = requestAnimationFrame(() => {
+  //         let bestCandidate = null;
+  //         let highestRatio = 0;
+
+  //         // Find which card is arguably "most" visible
+  //         for (const [id, data] of ratios.entries()) {
+  //           if (data.isIntersecting && data.ratio > highestRatio) {
+  //             highestRatio = data.ratio;
+  //             bestCandidate = id;
+  //           }
+  //         }
+
+  //         // Only update if the candidate is clearly visible (> 10% in the sweet spot)
+  //         if (bestCandidate && highestRatio > 0.1) {
+  //           setActiveCard(prev => (prev === bestCandidate ? prev : bestCandidate));
+  //         }
+
+  //         rafId = null;
+  //       });
+  //     }
+  //   };
+
+  //   const observer = new IntersectionObserver(observerCallback, observerOptions);
+  //   const elements = document.querySelectorAll('[data-project-id]');
+  //   elements.forEach(el => observer.observe(el));
+
+  //   return () => {
+  //     if (rafId) cancelAnimationFrame(rafId);
+  //     observer.disconnect();
+  //   };
+  // }, [isMobile]); // Dependency array only contains isMobile to prevent recreation
 
   return (
     <section id="work" className="px-6 pt-6 md:pt-24 max-w-7xl mx-auto mb-6 md:mb-12 lg:mb-32">
@@ -80,7 +113,7 @@ const WorkModules = () => {
                 >
                   <div className="relative h-full w-full group flex flex-col" data-project-id="parkway" onClick={() => toggleCard('parkway')}>
                     {/* Visual Decoration */}
-                    <div className="absolute inset-0 blueprint-bg opacity-10 md:group-hover:opacity-20 transition-opacity"></div>
+                    <div className="absolute inset-0 blueprint-bg opacity-10 md:group-hover:opacity-20 rounded-2xl transition-opacity"></div>
                     <div className="absolute top-12 right-12 rounded-lg opacity-5 md:group-hover:opacity-20 transition-all duration-700 scale-150">
                       <SiAngular size={200} />
                     </div>
@@ -154,7 +187,7 @@ const WorkModules = () => {
                 >
                   <div className="relative h-full w-full group flex flex-col" data-project-id="fleetyes" onClick={() => toggleCard('fleetyes')}>
                     {/* Visual Decoration */}
-                    <div className="absolute inset-0 blueprint-bg opacity-10 md:group-hover:opacity-20 transition-opacity"></div>
+                    <div className="absolute inset-0 blueprint-bg opacity-10 md:group-hover:opacity-20 rounded-2xl transition-opacity"></div>
                     <div className="ember-icon absolute top-12 right-12 opacity-5 md:group-hover:opacity-20 transition-all duration-700 scale-150">
                       <SiEmberdotjs size={200} />
                     </div>
@@ -228,7 +261,7 @@ const WorkModules = () => {
                 >
                   <div className="relative h-full w-full group flex flex-col" data-project-id="enabling" onClick={() => toggleCard('enabling')}>
                     {/* Visual Decoration */}
-                    <div className="absolute inset-0 blueprint-bg opacity-10 md:group-hover:opacity-20 transition-opacity"></div>
+                    <div className="absolute inset-0 blueprint-bg opacity-10 md:group-hover:opacity-20 rounded-2xl transition-opacity"></div>
                     <div className="absolute top-12 right-12 rounded-lg opacity-5 md:group-hover:opacity-20 transition-all duration-700 scale-150 text-yellow-500">
                       <SiWordpress size={200} />
                     </div>
@@ -272,7 +305,7 @@ const WorkModules = () => {
                           <span className="text-white font-black underline decoration-yellow-500/50">brand-accurate typography and layout</span> while 
                           maintaining <span className="text-yellow-500 font-bold">SEO-optimized semantic structure</span>.
                         </p>
-                        <div className={`${activeCard === 'enabling' ? 'grid' : 'hidden'} md:grid grid-cols-2 gap-4 stagger-in stagger-delay-4`}>
+                        <div className={`${activeCard === 'enabling' ? 'grid' : 'hidden'} md:grid grid-cols-2 gap-4 stagger-in stagger-delay-4 mb-4 md:mb-6`}>
                            <div>
                               <p className="secondary-label">Core Features</p>
                               <p className="text-xs text-gray-200 font-medium">Custom HTML/CSS, Responsive Design</p>
@@ -311,7 +344,7 @@ const WorkModules = () => {
                 >
                   <div className="relative h-full w-full group flex flex-col" data-project-id="friyay" onClick={() => toggleCard('friyay')}>
                     {/* Visual Decoration */}
-                    <div className="absolute inset-0 blueprint-bg opacity-10 md:group-hover:opacity-20 transition-opacity"></div>
+                    <div className="absolute inset-0 blueprint-bg opacity-10 md:group-hover:opacity-20 rounded-2xl transition-opacity"></div>
                     <div className="absolute top-12 right-12 rounded-lg opacity-5 md:group-hover:opacity-20 transition-all duration-700 scale-150 text-blue-400">
                       <SiNextdotjs size={200} />
                     </div>
@@ -383,7 +416,7 @@ const WorkModules = () => {
                 >
                   <div className="relative h-full w-full group flex flex-col" data-project-id="mindset" onClick={() => toggleCard('mindset')}>
                     {/* Visual Decoration */}
-                    <div className="absolute inset-0 blueprint-bg opacity-10 md:group-hover:opacity-20 transition-opacity"></div>
+                    <div className="absolute inset-0 blueprint-bg opacity-10 md:group-hover:opacity-20 rounded-2xl transition-opacity"></div>
                     <div className="absolute top-12 right-12 rounded-lg opacity-5 md:group-hover:opacity-20 transition-all duration-700 scale-150 text-blue-400">
                       <SiNextdotjs size={200} />
                     </div>
@@ -453,8 +486,8 @@ const WorkModules = () => {
                             {[
                                 { name: 'Fleetyes.com', url: 'https://fleetyes.com/', active: true },
                                 { name: 'Seatcurity', url: 'https://seatcurity.uk/', active: true },
-                                { name: 'AgileCyber', url: 'https://agilecyber.com/', active: false },
-                                { name: 'Pawpal', url: 'https://web.archive.org/web/20250910103506/https://pawpal.uk/', active: false }
+                                { name: 'AgileCyber (Archived)', url: 'https://agilecyber.com/', active: false },
+                                { name: 'Pawpal (Archived)', url: 'https://web.archive.org/web/20250910103506/https://pawpal.uk/', active: false }
                             ].map((site) => (
                                 <a 
                                     key={site.name}
@@ -493,7 +526,7 @@ const WorkModules = () => {
                 >
                   <div className="relative h-full w-full group flex flex-col" data-project-id="koyn" onClick={() => toggleCard('koyn')}>
                     {/* Visual Decoration */}
-                    <div className="absolute inset-0 blueprint-bg opacity-10 md:group-hover:opacity-20 transition-opacity"></div>
+                    <div className="absolute inset-0 blueprint-bg opacity-10 md:group-hover:opacity-20 rounded-2xl transition-opacity"></div>
                     {/* Default State */}
                     <div className={`${activeCard === 'koyn' ? 'hidden' : 'flex'} p-6 md:p-8 items-center justify-between min-h-[140px] md:h-full transition-all duration-500 md:group-hover:opacity-0 md:flex`}>
                       <div>
@@ -502,8 +535,10 @@ const WorkModules = () => {
                         
                         {/* Mobile Hint */}
                         <div className="md:hidden mt-4 flex items-center justify-between text-[10px] font-black uppercase tracking-widest text-purple-500">
+                          <div className="flex">
                           <span>View Details</span>
                           <ChevronRight size={14} className="animate-bounce-x" />
+                          </div>
                         </div>
                       </div>
                       <div className="text-purple-500"><SiWordpress size={24} /></div>
@@ -573,7 +608,7 @@ const WorkModules = () => {
                 >
                   <div className="relative h-full w-full group flex flex-col" data-project-id="astarprep" onClick={() => toggleCard('astarprep')}>
                     {/* Visual Decoration */}
-                    <div className="absolute inset-0 blueprint-bg opacity-10 md:group-hover:opacity-20 transition-opacity"></div>
+                    <div className="absolute inset-0 blueprint-bg opacity-10 md:group-hover:opacity-20 rounded-2xl transition-opacity"></div>
                     {/* Default State */}
                     <div className={`${activeCard === 'astarprep' ? 'hidden' : 'flex'} p-6 flex flex-col justify-center text-center min-h-[140px] md:h-full transition-all duration-500 md:group-hover:opacity-0 md:flex`}>
                       <h4 className="font-bold">AStarPrep</h4>
@@ -624,10 +659,10 @@ const WorkModules = () => {
                 >
                   <div className="relative h-full w-full group flex flex-col" data-project-id="petcare" onClick={() => toggleCard('petcare')}>
                     {/* Visual Decoration */}
-                    <div className="absolute inset-0 blueprint-bg opacity-10 md:group-hover:opacity-20 transition-opacity"></div>
+                    <div className="absolute inset-0 blueprint-bg opacity-10 md:group-hover:opacity-20 rounded-2xl transition-opacity"></div>
                     {/* Default State */}
                     <div className={`${activeCard === 'petcare' ? 'hidden' : 'flex'} p-6 flex flex-col justify-center text-center min-h-[140px] md:h-full transition-all duration-500 md:group-hover:opacity-0 md:flex`}>
-                      <h4 className="font-bold">Pet Care Marketing</h4>
+                      <h4 className="font-bold">AI-Powered Scraping</h4>
                       <p className="text-[10px] text-gray-500 uppercase mt-2">3000+ Emails</p>
                       
                       {/* Mobile Hint */}
@@ -685,7 +720,7 @@ const WorkModules = () => {
                               <ChevronRight size={14} className="animate-bounce-x" />
                             </div>
                         </div>
-                        <ChevronRight className="text-gray-600 group-hover:translate-x-2 transition-transform" />
+                        <ChevronRight className="hidden md:block text-gray-600 group-hover:translate-x-2 transition-transform" />
                     </div>
                      {/* Expanded State */}
                     <div className={`${activeCard === 'leelaks' ? 'relative opacity-100' : 'absolute inset-0 opacity-0 pointer-events-none'} bg-blue-600/10 backdrop-blur-xl p-6 m-2 z-20 flex flex-col justify-center rounded-3xl transition-all duration-700 md:group-hover:opacity-100 md:group-hover:pointer-events-auto !clip-path-none`}>
@@ -748,8 +783,10 @@ const WorkModules = () => {
                         
                         {/* Mobile Hint */}
                         <div className="md:hidden mt-4 flex items-center justify-between text-[10px] font-black uppercase tracking-widest text-yellow-500">
+                          <div className='flex'>
                           <span>View Details</span>
                           <ChevronRight size={14} className="animate-bounce-x" />
+                          </div>
                         </div>
                       </div>
                       <div className="text-yellow-500"><Zap /></div>
